@@ -6,7 +6,7 @@ import { errorMiddleware } from "./middlewares/error.middleware.js";
 import { checkDbConnection } from "./database/client.js";
 import cors from "cors";
 
-const port = process.env.API_PORT || 3000;
+const port = process.env.API_PORT || 3001;
 
 const app = express();
 
