@@ -15,48 +15,33 @@ import {
 import $ from "jquery";
 import { Edit2 } from "lucide-react";
 import { useState } from "react";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
-import { Song } from "@/interfaces/song";
-import { useSongContext } from "@/context/song.context";
 import { toast } from "@/hooks/use-toast";
 import { useAlbumContext } from "@/context/album.context";
 import { convertToISOString } from "@/lib/convertToISOString";
+import { Album } from "@/interfaces/album";
+import { convertFromISOString } from "@/lib/convertFromISOString";
 
-export function SongDrawer({ song }: { song: Song }) {
-  const { fetchSongs } = useSongContext();
-  const { albums } = useAlbumContext();
-  const [name, setName] = useState(song.name);
-  const [artist, setArtist] = useState(song.artist);
-  const [albumId, setAlbumId] = useState<number | null>(null);
+export function AlbumDrawer({ album }: { album: Album }) {
+  const { fetchAlbums } = useAlbumContext();
+  const [name, setName] = useState(album.name);
+  const [artist, setArtist] = useState(album.artist);
   const [releaseDate, setReleaseDate] = useState(
-    new Date(song?.releaseDate).toLocaleDateString("pt-BR", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    })
+    convertFromISOString(album.releaseDate)
   );
 
   const submitHandler = (id: number) => {
     $.ajax({
-      url: `http://localhost:3001/song/${id}`,
+      url: `http://localhost:3001/album/${id}`,
       method: "PATCH",
       data: JSON.stringify({
         name,
         artist,
         releaseDate: convertToISOString(releaseDate),
-        albumId,
       }),
       contentType: "application/json",
       dataType: "json",
       success: () => {
-        fetchSongs();
+        fetchAlbums();
         toast({
           title: "Sucesso",
           description: "Sua música foi alterada com sucesso!",
@@ -82,9 +67,9 @@ export function SongDrawer({ song }: { song: Song }) {
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle>Editar Música</SheetTitle>
+          <SheetTitle>Editar Album</SheetTitle>
           <SheetDescription>
-            Faça mudanças em sua música aqui. Clique em salvar quando estiver
+            Faça mudanças em seus Albums aqui. Clique em salvar quando estiver
             pronto.
           </SheetDescription>
         </SheetHeader>
@@ -123,37 +108,12 @@ export function SongDrawer({ song }: { song: Song }) {
               placeholder="dd/mm/aaaa"
             />
           </div>
-
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="album" className="text-right">
-              Álbum
-            </Label>
-            <Select
-              onValueChange={(value) => {
-                console.log(value);
-                setAlbumId(Number(value));
-              }}
-            >
-              <SelectTrigger className="w-[248px]">
-                <SelectValue placeholder="Selecione um álbum" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  {albums.map((album) => (
-                    <SelectItem key={album.id} value={String(album.id)}>
-                      {album.name}
-                    </SelectItem>
-                  ))}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
         </div>
         <SheetFooter>
           <SheetClose asChild>
             <Button
               onClick={() => {
-                submitHandler(song.id);
+                submitHandler(album.id);
               }}
             >
               Salvar alterações

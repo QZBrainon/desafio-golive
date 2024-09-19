@@ -42,7 +42,7 @@ export default function SongTable() {
                   </TableCell>
                   <TableCell className="text-center flex justify-end">
                     <SongDrawer song={song} />
-                    <DeleteAlert id={song.id} />
+                    <DeleteAlert id={song.id} type="song" />
                   </TableCell>
                 </TableRow>
               ))}

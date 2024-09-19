@@ -15,19 +15,35 @@ import { Trash2 } from "lucide-react";
 import $ from "jquery";
 import { useSongContext } from "@/context/song.context";
 import { toast } from "@/hooks/use-toast";
+import { useAlbumContext } from "@/context/album.context";
 
-export function DeleteAlert({ id }: { id: number }) {
+export function DeleteAlert({
+  id,
+  type,
+}: {
+  id: number;
+  type: "song" | "album";
+}) {
   const { fetchSongs } = useSongContext();
+  const { fetchAlbums } = useAlbumContext();
   const deleteHandler = (id: number) => {
     $.ajax({
-      url: `http://localhost:3001/song/${id}`,
+      url: `http://localhost:3001/${type}/${id}`,
       method: "DELETE",
       success: () => {
-        fetchSongs();
-        toast({
-          title: "Sucesso",
-          description: "Sua música foi deletada com sucesso!",
-        });
+        if (type === "song") {
+          fetchSongs();
+          toast({
+            title: "Sucesso",
+            description: "Sua música foi deletada com sucesso!",
+          });
+        } else {
+          fetchAlbums();
+          toast({
+            title: "Sucesso",
+            description: "Seu álbum foi deletado com sucesso!",
+          });
+        }
       },
       error: (err) => {
         console.error("Error fetching data:", err);
