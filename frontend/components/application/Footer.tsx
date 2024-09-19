@@ -12,7 +12,7 @@ export default function Footer() {
             <ul className="flex space-x-4">
               <li>
                 <Link
-                  href="/about"
+                  href="https://github.com/QZBrainon/desafio-golive"
                   className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
                 >
                   <GitHubLogoIcon className="h-6 w-6" />
@@ -20,7 +20,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/contact"
+                  href="https://www.linkedin.com/in/brainon-queiroz/"
                   className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
                 >
                   <LinkedInLogoIcon className="h-6 w-6" />
