@@ -14,8 +14,7 @@ import {
 } from "@/components/ui/sheet";
 import $ from "jquery";
 import { Edit2 } from "lucide-react";
-import { useState, useEffect } from "react";
-import { Album } from "@/interfaces/album";
+import { useState } from "react";
 import {
   Select,
   SelectContent,
@@ -25,27 +24,24 @@ import {
   SelectValue,
 } from "../ui/select";
 import { Song } from "@/interfaces/song";
-import { convertFromISOString } from "@/lib/convertFromISOString";
 import { useSongContext } from "@/context/song.context";
 import { toast } from "@/hooks/use-toast";
+import { useAlbumContext } from "@/context/album.context";
+import { convertToISOString } from "@/lib/convertToISOString";
 
-interface SheetDrawerProps<T> {
-  type: T;
-}
-
-export function SheetDrawer({
-  type,
-  song,
-}: {
-  type: SheetDrawerProps<string>["type"];
-  song: Song;
-}) {
+export function SongDrawer({ song }: { song: Song }) {
   const { fetchSongs } = useSongContext();
-  const [albums, setAlbums] = useState<Album[]>([]);
+  const { albums } = useAlbumContext();
   const [name, setName] = useState(song.name);
   const [artist, setArtist] = useState(song.artist);
-  const [releaseDate, setReleaseDate] = useState(song.releaseDate);
   const [albumId, setAlbumId] = useState<number | null>(null);
+  const [releaseDate, setReleaseDate] = useState(
+    new Date(song?.releaseDate).toLocaleDateString("pt-BR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    })
+  );
 
   const submitHandler = (id: number) => {
     $.ajax({
@@ -55,7 +51,7 @@ export function SheetDrawer({
         id,
         name,
         artist,
-        releaseDate,
+        releaseDate: convertToISOString(releaseDate),
         albumId,
       }),
       contentType: "application/json",
@@ -78,19 +74,6 @@ export function SheetDrawer({
     });
   };
 
-  useEffect(() => {
-    $.ajax({
-      url: "http://localhost:3001/album",
-      method: "GET",
-      success: (data: Album[]) => {
-        setAlbums(data);
-      },
-      error: (err) => {
-        console.error("Error fetching data:", err);
-      },
-    });
-  }, []);
-
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -100,9 +83,9 @@ export function SheetDrawer({
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle>Editar {type}</SheetTitle>
+          <SheetTitle>Editar Música</SheetTitle>
           <SheetDescription>
-            Faça mudanças em sua {type} aqui. Clique em salvar quando estiver
+            Faça mudanças em sua música aqui. Clique em salvar quando estiver
             pronto.
           </SheetDescription>
         </SheetHeader>
@@ -130,38 +113,42 @@ export function SheetDrawer({
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="artist" className="text-right">
+            <Label htmlFor="releaseDate" className="text-right">
               Data de lançamento
             </Label>
             <Input
-              id="artist"
-              value={convertFromISOString(releaseDate)}
+              id="releaseDate"
+              value={releaseDate}
               onChange={(e) => setReleaseDate(e.target.value)}
               className="col-span-3"
               placeholder="dd/mm/aaaa"
             />
           </div>
-          {type === "música" && (
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="album" className="text-right">
-                Álbum
-              </Label>
-              <Select onValueChange={(value) => setAlbumId(Number(value))}>
-                <SelectTrigger className="w-[248px]">
-                  <SelectValue placeholder="Selecione um álbum" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    {albums.map((album) => (
-                      <SelectItem key={album.id} value={String(album.id)}>
-                        {album.name}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </div>
-          )}
+
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="album" className="text-right">
+              Álbum
+            </Label>
+            <Select
+              onValueChange={(value) => {
+                console.log(value);
+                setAlbumId(Number(value));
+              }}
+            >
+              <SelectTrigger className="w-[248px]">
+                <SelectValue placeholder="Selecione um álbum" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  {albums.map((album) => (
+                    <SelectItem key={album.id} value={String(album.id)}>
+                      {album.name}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
         <SheetFooter>
           <SheetClose asChild>

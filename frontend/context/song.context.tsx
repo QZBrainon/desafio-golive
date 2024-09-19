@@ -21,7 +21,7 @@ export const SongProvider: React.FC<{ children: React.ReactNode }> = ({
       url: "http://localhost:3001/song",
       method: "GET",
       success: (data: Song[]) => {
-        setSongs(data.filter((song) => !song.deleted));
+        setSongs(data.filter((song) => !song?.deleted));
       },
       error: (err) => {
         console.error("Error fetching data:", err);

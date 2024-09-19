@@ -40,8 +40,8 @@ export const updateSongController = async (
   res: Response<any>
 ) => {
   const { id } = req.params;
-  const { name, artist, releaseDate } = req.body;
-  const song = await updateSong(+id, { name, artist, releaseDate });
+  const { name, artist, releaseDate, albumId } = req.body;
+  const song = await updateSong(+id, { name, artist, releaseDate, albumId });
   res.status(200).json(song);
 };
 

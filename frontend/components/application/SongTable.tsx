@@ -8,9 +8,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { SheetDrawer } from "./SheetDrawer";
+import { SongDrawer } from "./SongDrawer";
 import { useSongContext } from "@/context/song.context";
 import { DeleteAlert } from "./DeleteAlert";
+import { convertFromISOString } from "@/lib/convertFromISOString";
 
 export default function SongTable() {
   const { songs } = useSongContext();
@@ -37,14 +38,10 @@ export default function SongTable() {
                   <TableCell>{song?.name}</TableCell>
                   <TableCell>{song?.artist}</TableCell>
                   <TableCell className="text-center">
-                    {new Date(song?.releaseDate).toLocaleDateString("pt-BR", {
-                      day: "2-digit",
-                      month: "2-digit",
-                      year: "numeric",
-                    })}
+                    {convertFromISOString(song?.releaseDate)}
                   </TableCell>
                   <TableCell className="text-center flex justify-end">
-                    <SheetDrawer type="música" song={song} />
+                    <SongDrawer song={song} />
                     <DeleteAlert id={song.id} />
                   </TableCell>
                 </TableRow>

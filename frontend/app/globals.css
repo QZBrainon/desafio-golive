@@ -60,11 +60,11 @@
 }
 
 .guitar-bg {
-  background-image: url("../lib/guitar-bg.jpg");
+  background-image: url("../public/guitar-bg.jpg");
 }
 
 .album-bg {
-  background-image: url("../lib/album-bg.jpg");
+  background-image: url("../public/album-bg.jpg");
 }
 
 .guitar-bg:hover {

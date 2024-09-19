@@ -22,6 +22,7 @@ import $ from "jquery";
 import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { useSongContext } from "@/context/song.context";
+import { convertToISOString } from "@/lib/convertToISOString";
 
 export function NewSongForm() {
   const { albums } = useAlbumContext();
@@ -48,7 +49,7 @@ export function NewSongForm() {
       data: JSON.stringify({
         name,
         artist,
-        releaseDate: new Date(releaseDate).toISOString(),
+        releaseDate: convertToISOString(releaseDate),
         albumId,
       }),
       contentType: "application/json",

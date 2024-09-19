@@ -9,5 +9,6 @@ export interface UpdateSongDto {
   name?: string;
   artist?: string;
   releaseDate?: string;
+  albumId?: number;
   deleted?: boolean;
 }

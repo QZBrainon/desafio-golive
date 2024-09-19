@@ -3,7 +3,11 @@ import prisma from "../database/client.js";
 import ERRORS from "../middlewares/error.middleware.js";
 
 export const getAllSongs = async () => {
-  const songs = await prisma.song.findMany();
+  const songs = await prisma.song.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
   return songs;
 };
 

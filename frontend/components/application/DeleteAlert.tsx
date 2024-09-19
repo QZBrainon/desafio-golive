@@ -38,7 +38,7 @@ export function DeleteAlert({ id }: { id: number }) {
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button variant="ghost" aria-label="delete_song">
-          <Trash2 className="h-4 w-4" />
+          <Trash2 className="h-4 w-4 " />
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>

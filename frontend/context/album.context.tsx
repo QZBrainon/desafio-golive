@@ -6,6 +6,7 @@ import { Album } from "@/interfaces/album"; // Adjust the import according to yo
 interface AlbumContextType {
   albums: Album[];
   setAlbums: React.Dispatch<React.SetStateAction<Album[]>>;
+  fetchAlbums: () => void;
 }
 
 const AlbumContext = createContext<AlbumContextType | undefined>(undefined);
@@ -15,7 +16,7 @@ export const AlbumProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [albums, setAlbums] = useState<Album[]>([]);
 
-  useEffect(() => {
+  const fetchAlbums = () => {
     $.ajax({
       url: "http://localhost:3001/album",
       method: "GET",
@@ -26,10 +27,14 @@ export const AlbumProvider: React.FC<{ children: React.ReactNode }> = ({
         console.error("Error fetching data:", err);
       },
     });
+  };
+
+  useEffect(() => {
+    fetchAlbums();
   }, []);
 
   return (
-    <AlbumContext.Provider value={{ albums, setAlbums }}>
+    <AlbumContext.Provider value={{ albums, setAlbums, fetchAlbums }}>
       {children}
     </AlbumContext.Provider>
   );
