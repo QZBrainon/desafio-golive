@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0.33
+    restart: always
+    container_name: desafio-golive-container
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: desafio-golive-db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - '3306:3306'

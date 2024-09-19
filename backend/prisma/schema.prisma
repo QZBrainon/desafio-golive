@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Album {
+  id          Int      @id @default(autoincrement())
+  name        String
+  artist      String
+  releaseDate DateTime
+  deleted     Boolean  @default(false)
+  songs       Song[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Song {
+  id          Int      @id @default(autoincrement())
+  name        String
+  artist      String
+  releaseDate DateTime
+  deleted     Boolean  @default(false)
+  album       Album?   @relation(fields: [albumId], references: [id])
+  albumId     Int?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
