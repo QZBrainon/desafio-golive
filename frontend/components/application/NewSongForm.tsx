@@ -53,7 +53,7 @@ export function NewSongForm() {
       }),
       contentType: "application/json",
       dataType: "json",
-      success: (data: any) => {
+      success: () => {
         toast({
           title: "Sucesso",
           description: "Sua música foi cadastrada com sucesso!",

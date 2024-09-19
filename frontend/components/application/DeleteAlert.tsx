@@ -22,8 +22,7 @@ export function DeleteAlert({ id }: { id: number }) {
     $.ajax({
       url: `http://localhost:3001/song/${id}`,
       method: "DELETE",
-      success: (data: any) => {
-        console.log(data);
+      success: () => {
         fetchSongs();
         toast({
           title: "Sucesso",

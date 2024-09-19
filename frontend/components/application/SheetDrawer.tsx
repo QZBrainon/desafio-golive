@@ -60,8 +60,7 @@ export function SheetDrawer({
       }),
       contentType: "application/json",
       dataType: "json",
-      success: (data: Album[]) => {
-        console.log(data);
+      success: () => {
         fetchSongs();
         toast({
           title: "Sucesso",

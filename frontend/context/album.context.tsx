@@ -20,7 +20,7 @@ export const AlbumProvider: React.FC<{ children: React.ReactNode }> = ({
       url: "http://localhost:3001/album",
       method: "GET",
       success: (data: Album[]) => {
-        setAlbums(data.filter((album) => !album.deleted)); // Assuming 'deleted' exists
+        setAlbums(data.filter((album) => !album?.deleted));
       },
       error: (err) => {
         console.error("Error fetching data:", err);
