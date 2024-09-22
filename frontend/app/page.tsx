@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Music2Icon, AlbumIcon } from "lucide-react";
 
 export default function Home() {
   return (
@@ -12,7 +11,6 @@ export default function Home() {
       >
         <div className="flex items-center gap-2">
           <h2 className="text-4xl font-bold text-white mb-4">Músicas</h2>
-          <Music2Icon className="text-white text-4xl mb-4 h-7 w-7" />
         </div>
       </Link>
       <Link
@@ -21,7 +19,6 @@ export default function Home() {
       >
         <div className="flex justify-end items-center gap-2">
           <h2 className="text-4xl font-bold text-white mb-4">Albums</h2>
-          <AlbumIcon className="text-white text-4xl mb-4 h-7 w-7" />
         </div>
       </Link>
     </div>
