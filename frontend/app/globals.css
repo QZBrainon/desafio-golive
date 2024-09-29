@@ -104,6 +104,41 @@
   cursor: pointer;
 }
 
+/* .card-container {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+} */
+
+.card {
+  rotate: 30deg;
+  transition: all 0.3s ease-in-out;
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.flip {
+  animation: flip 10s forwards infinite;
+}
+
+@keyframes flip {
+  0% {
+    transform: perspective(1000px) rotateY(0deg);
+    transform-style: preserve-3d;
+  }
+  50% {
+    transform: perspective(1000px) rotateY(180deg);
+    transform-style: preserve-3d;
+
+  }
+  100% {
+    transform: perspective(1000px) rotateY(360deg);
+    transform-style: preserve-3d;
+  }
+}
+
 @layer base {
   * {
     @apply border-border;

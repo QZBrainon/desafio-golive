@@ -6,7 +6,7 @@ export default function Footer() {
 
   return (
     <footer>
-      <div className="container mx-auto px-4 py-8 border-t">
+      <div className="container mx-auto mt-auto px-4 py-8 border-t">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <nav className="mb-4 md:mb-0">
             <ul className="flex space-x-4">

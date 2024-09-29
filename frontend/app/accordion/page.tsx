@@ -12,14 +12,14 @@ export default function Page() {
   };
 
   return (
-    <div className="h-screen flex justify-center items-center ">
-      <div className="container flex justify-center items-center gap-4">
+    <div className=" flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center gap-4 h-[80%]">
         {[1, 2, 3, 4, 5].map((imgNum, index) => (
           <div
             key={index}
             onClick={() => handleClick(index)}
-            className={`relative -skew-x-12 h-96 filter grayscale hover:filter-none hover:scale-110 transition-all duration-300 ${
-              expandedIndex === index ? "w-64" : "w-16"
+            className={`relative -skew-x-12 h-[80%] filter grayscale hover:filter-none hover:scale-110 transition-all duration-300 ${
+              expandedIndex === index ? "w-80" : "w-16"
             }`}
           >
             <span

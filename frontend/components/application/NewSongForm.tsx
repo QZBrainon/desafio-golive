@@ -35,14 +35,6 @@ export function NewSongForm() {
   const router = useRouter();
 
   const submitHandler = () => {
-    console.log(
-      JSON.stringify({
-        name,
-        artist,
-        releaseDate,
-        albumId,
-      })
-    );
     $.ajax({
       url: "http://localhost:3001/song",
       method: "POST",
