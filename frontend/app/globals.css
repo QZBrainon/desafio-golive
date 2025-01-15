@@ -104,10 +104,10 @@
   cursor: pointer;
 }
 
-/* .card-container {
+.card-container {
   perspective: 1000px;
   transform-style: preserve-3d;
-} */
+}
 
 .card {
   rotate: 30deg;
@@ -120,7 +120,7 @@
 }
 
 .flip {
-  animation: flip 10s forwards infinite;
+  animation: flip 10s linear infinite;
 }
 
 @keyframes flip {
@@ -146,4 +146,59 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* .clipped {
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+} */
+
+.slider-item {
+  transform: rotateY('20deg');
+}
+
+.item {
+  transition: 0.5s;
+  filter: brightness(0);
+  cursor: pointer;
+  position: relative;
+}
+
+.item:hover {
+  transform: translateZ(200px);
+  transition: transform 0.125s ease;
+  cursor: pointer;
+  filter: brightness(1);
+}
+
+.item::after, .item::before {
+  content: "";
+  position: absolute;
+  right: -1rem;
+  width: 1rem;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.item::after {
+  left: -1rem;
+}
+
+.item:hover + *{
+  filter: brightness(0.6);
+  transform: translateZ(150px) rotateY(40deg);
+}
+
+.item:hover + * + *{
+  filter: brightness(0.4);
+  transform: translateZ(70px) rotateY(20deg);
+}
+
+.container .item:has(+ *:hover){
+  filter: brightness(0.6);
+  transform: translateZ(150px) rotateY(-40deg);
+}
+
+.container .item:has(+ * + *:hover){
+  filter: brightness(0.4);
+  transform: translateZ(70px) rotateY(-20deg);
 }

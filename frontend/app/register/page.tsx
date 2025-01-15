@@ -46,7 +46,7 @@ export default function Register() {
           </form>
         </div>
         <button
-          className="bg-primary p-2 rounded-md text-secondary-foreground hover:bg-primary/80"
+          className="bg-primary p-2 text-secondary-foreground hover:bg-primary/80 text-slate-100"
           type="submit"
         >
           Register

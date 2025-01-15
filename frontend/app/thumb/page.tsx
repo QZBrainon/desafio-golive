@@ -57,7 +57,7 @@ export default function Thumb() {
 
             <button
               onClick={handleClick}
-              className="inline-flex text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg"
+              className="inline-flex text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg [clip-path:polygon(10px_0,_100%_0,_100%_calc(100%_-_10px),_calc(100%_-_10px)_100%,_0_100%,_0_10px)]"
             >
               Buscar
             </button>
