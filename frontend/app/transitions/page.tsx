@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import V0Version from "./v0-version";
 
 export default function Page() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -105,7 +106,6 @@ export default function Page() {
           </div>
         </div>
         {/* Buttons */}
-
         <div className="flex items-center justify-center gap-4 py-4">
           <button
             className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
@@ -127,6 +127,7 @@ export default function Page() {
           </button>
         </div>
       </div>
+      <V0Version />
     </div>
   );
 }

@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${poppins.className} antialiased flex flex-col min-h-screen`}
+        className={`${poppins.className} antialiased flex flex-col h-screen`}
       >
         <ThemeProvider
           attribute="class"
