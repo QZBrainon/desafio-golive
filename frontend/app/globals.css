@@ -251,12 +251,15 @@
 @keyframes move-left-and-back {
   0% {
     transform: translateY(-50%) translateX(-50%) rotate(30deg);
+    opacity: 0.5;
   }
   50% {
     transform: translateY(-50%) translateX(-250%) rotate(30deg);
+    opacity: 1;
   }
   100% {
     transform: translateY(-50%) translateX(-50%) rotate(30deg);
+    opacity: 0.5;
   }
 }
 
@@ -276,9 +279,14 @@
   0%,
   100% {
     transform: translate(0, 0) rotate(180deg);
+    opacity: 0.7;
   }
   50% {
     transform: translate(50%, 50%) rotate(180deg);
-    opacity: 0.7;
+    opacity: 1;
   }
+}
+
+.custom-shape {
+  clip-path: path('M 10,50 L 90,50 A 10,10 0,0,0 100,40 L 100,10 A 10,10 0,0,1 110,0 L 190,0 A 10,10 0,0,1 200,10 L 200,190 A 10,10 0,0,1 190,200 L 10,200 A 10,10 0,0,1 0,190 L 0,60 A 10,10 0,0,1 10,50 Z');
 }
